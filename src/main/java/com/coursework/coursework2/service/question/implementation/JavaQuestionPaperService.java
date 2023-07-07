@@ -75,10 +75,5 @@ public class JavaQuestionPaperService implements QuestionPaperService {
         return questionPapers;
     }
 
-    @Override
-    public QuestionPaper getRandomQuestionPaper(ArrayList<QuestionPaper> questionPapersPool) {
-        Random random = new Random();
-        Integer questionPaperId = random.nextInt(questionPapersPool.size());
-        return questionPapersPool.get(questionPaperId);
-    }
+
 }

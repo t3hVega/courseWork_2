@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
@@ -18,6 +19,14 @@ public class ExaminerServiceImpl implements ExaminerService {
     public ExaminerServiceImpl(QuestionPaperService questionPaperService) {
         this.questionPaperService = questionPaperService;
     }
+
+    @Override
+    public QuestionPaper getRandomQuestionPaper(ArrayList<QuestionPaper> questionPapersPool) {
+        Random random = new Random();
+        Integer questionPaperId = random.nextInt(questionPapersPool.size());
+        return questionPapersPool.get(questionPaperId);
+    }
+
     @Override
     public Collection<QuestionPaper> getAllQuestions(int amount) {
 
@@ -27,10 +36,12 @@ public class ExaminerServiceImpl implements ExaminerService {
 
         Collection<QuestionPaper> questionPapers = new HashSet<>();
 
-        for (int i = 0; i < amount; i++) {
-            QuestionPaper questionPaper = questionPaperService.getRandomQuestionPaper(questionPaperService.getAll());
-            questionPapers.add(questionPaper);
+        while(questionPapers.size() < amount) {
+            QuestionPaper questionPaper = getRandomQuestionPaper(questionPaperService.getAll());
+            if(!questionPapers.contains(questionPaper)) questionPapers.add(questionPaper);
         }
+
         return questionPapers;
+
     }
 }
