@@ -20,12 +20,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         this.questionPaperService = questionPaperService;
     }
 
-    @Override
-    public QuestionPaper getRandomQuestionPaper(ArrayList<QuestionPaper> questionPapersPool) {
-        Random random = new Random();
-        Integer questionPaperId = random.nextInt(questionPapersPool.size());
-        return questionPapersPool.get(questionPaperId);
-    }
+
 
     @Override
     public Collection<QuestionPaper> getAllQuestions(int amount) {
@@ -37,8 +32,8 @@ public class ExaminerServiceImpl implements ExaminerService {
         Collection<QuestionPaper> questionPapers = new HashSet<>();
 
         while(questionPapers.size() < amount) {
-            QuestionPaper questionPaper = getRandomQuestionPaper(questionPaperService.getAll());
-            if(!questionPapers.contains(questionPaper)) questionPapers.add(questionPaper);
+            QuestionPaper questionPaper = questionPaperService.getRandomQuestionPaper();
+            questionPapers.add(questionPaper);
         }
 
         return questionPapers;

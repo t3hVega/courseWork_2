@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
@@ -36,33 +35,26 @@ class ExaminerServiceImplTest {
     @BeforeEach
     public void setUpGetAll() {
         when(questionPaperService.getAll()).thenReturn(forSetUp);
+        when(questionPaperService.getRandomQuestionPaper()).
+                thenReturn(forSetUp.get(0),
+                        forSetUp.get(0),
+                        forSetUp.get(1));
     }
 
     @Test
     void shouldCorrectlyGenerateRandomQuestionPapersFromQuestionPapersArray() {
-        boolean expected = true;
-
-        Collection<QuestionPaper> expectedOutcome1 = new HashSet<>() {{
+        Collection<QuestionPaper> expected = new HashSet<>() {{
             add(new QuestionPaper("Что?", "Оно"));
             add(new QuestionPaper("Где?", "Там"));
         }};
 
-        Collection<QuestionPaper> expectedOutcome2 = new HashSet<>() {{
-            add(new QuestionPaper("Где?", "Там"));
-            add(new QuestionPaper("Когда?", "Тогда"));
-        }};
+        Collection<QuestionPaper> actual = examinerService.getAllQuestions(2);
 
-        Collection<QuestionPaper> expectedOutcome3 = new HashSet<>() {{
-            add(new QuestionPaper("Когда?", "Тогда"));
-            add(new QuestionPaper("Что?", "Оно"));
-        }};
-
-        Collection<QuestionPaper> actualOutcome = examinerService.getAllQuestions(2);
-
-        boolean actual = actualOutcome.equals(expectedOutcome1) ||
-                         actualOutcome.equals(expectedOutcome2) ||
-                         actualOutcome.equals(expectedOutcome3);
         Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected.size(), actual.size());
+        verify(questionPaperService, times(3)).getRandomQuestionPaper();
+
+
     }
 
     @Test

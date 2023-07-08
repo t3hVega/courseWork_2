@@ -75,5 +75,12 @@ public class JavaQuestionPaperService implements QuestionPaperService {
         return questionPapers;
     }
 
+    @Override
+    public QuestionPaper getRandomQuestionPaper() {
+        Random random = new Random();
+        Integer questionPaperId = random.nextInt();
+        return questionPapers.get(questionPaperId);
+    }
+
 
 }

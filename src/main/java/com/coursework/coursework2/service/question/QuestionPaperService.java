@@ -15,4 +15,6 @@ public interface QuestionPaperService {
 
     ArrayList<QuestionPaper> getAll();
 
+    QuestionPaper getRandomQuestionPaper();
+
 }

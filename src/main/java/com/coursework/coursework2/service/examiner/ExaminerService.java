@@ -9,5 +9,4 @@ import java.util.HashSet;
 public interface ExaminerService {
     Collection<QuestionPaper> getAllQuestions(int amount);
 
-    QuestionPaper getRandomQuestionPaper(ArrayList<QuestionPaper> questionPapersPool);
 }
