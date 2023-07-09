@@ -1,6 +1,6 @@
 package com.coursework.coursework2.controller.exam;
 
-import com.coursework.coursework2.model.QuestionPaper;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.service.examiner.ExaminerService;
 import org.springframework.web.bind.annotation.*;
 
