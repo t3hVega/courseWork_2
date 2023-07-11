@@ -9,4 +9,5 @@ public interface QuestionPaperService {
     QuestionPaper remove(String question, String answer);
     ArrayList<QuestionPaper> getAll();
     QuestionPaper getRandomQuestionPaper();
+
 }

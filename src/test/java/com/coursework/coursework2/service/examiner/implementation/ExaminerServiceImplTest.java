@@ -53,6 +53,7 @@ class ExaminerServiceImplTest {
                 mathQuestionPapers.get(1),
                 mathQuestionPapers.get(1),
                 mathQuestionPapers.get(2));
+
         Collection<QuestionPaper> expected = new HashSet<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
             add(new JavaQuestionPaper("Где?", "Там"));

@@ -143,5 +143,6 @@ class JavaQuestionPaperServiceImplTest {
         }};
         ArrayList<QuestionPaper> actual = javaQuestionPaperService.getAll();
         Assertions.assertEquals(expected, actual);
+
     }
 }

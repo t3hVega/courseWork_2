@@ -51,6 +51,7 @@ public class MathQuestionPaperRepositoryImplTest {
         MathQuestionPaper questionPaper1 = new MathQuestionPaper("1 + 1", 2);
         MathQuestionPaper questionPaper2 = new MathQuestionPaper("2 + 2", 4);
         MathQuestionPaper questionPaper3 = new MathQuestionPaper("3 + 3", 6);
+
         expected.add(questionPaper1);
         expected.add(questionPaper2);
         expected.add(questionPaper3);

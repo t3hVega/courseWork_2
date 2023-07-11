@@ -69,6 +69,7 @@ class MathQuestionPaperServiceImplTest {
         QuestionPaper expected = new MathQuestionPaper("1 + 1", 2);
         QuestionPaper actual = mathQuestionPaperService.add("1 + 1", "2");
         Assertions.assertEquals(expected, actual);
+
     }
 
     @Test

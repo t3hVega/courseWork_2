@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 @Repository
 public interface QuestionPaperRepository {
+
     QuestionPaper add(QuestionPaper questionPaper);
     QuestionPaper remove(QuestionPaper questionPaper);
     ArrayList<QuestionPaper> getAll();

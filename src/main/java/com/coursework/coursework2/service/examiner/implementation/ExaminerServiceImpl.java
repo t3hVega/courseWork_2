@@ -5,6 +5,7 @@ import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.service.examiner.ExaminerService;
 import com.coursework.coursework2.service.questionPaper.JavaQuestionPaperService;
 import com.coursework.coursework2.service.questionPaper.MathQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.QuestionPaperService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ import java.util.Random;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    @Qualifier
-    private JavaQuestionPaperService javaQuestionPaperService;
-    @Qualifier
-    private MathQuestionPaperService mathQuestionPaperService;
+    @Qualifier("java")
+    private QuestionPaperService javaQuestionPaperService;
+    @Qualifier("math")
+    private QuestionPaperService mathQuestionPaperService;
 
     public ExaminerServiceImpl(JavaQuestionPaperService javaQuestionPaperService,
                                MathQuestionPaperService mathQuestionPaperService) {

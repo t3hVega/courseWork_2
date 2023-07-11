@@ -52,6 +52,7 @@ public class JavaQuestionPaperRepositoryImplTest {
         JavaQuestionPaper questionPaper1 = new JavaQuestionPaper("Что?", "Оно");
         JavaQuestionPaper questionPaper2 = new JavaQuestionPaper("Где?", "Там");
         JavaQuestionPaper questionPaper3 = new JavaQuestionPaper("Когда?", "Тогда");
+
         expected.add(questionPaper1);
         expected.add(questionPaper2);
         expected.add(questionPaper3);

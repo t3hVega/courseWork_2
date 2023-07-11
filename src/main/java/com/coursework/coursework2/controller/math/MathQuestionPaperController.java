@@ -1,7 +1,6 @@
 package com.coursework.coursework2.controller.math;
 
 import com.coursework.coursework2.model.base.QuestionPaper;
-import com.coursework.coursework2.model.math.MathQuestionPaper;
 import com.coursework.coursework2.service.questionPaper.MathQuestionPaperService;
 import com.coursework.coursework2.service.questionPaper.QuestionPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
