@@ -1,19 +1,17 @@
-package com.coursework.coursework2.repository.java.impl;
+package com.coursework.coursework2.repository;
 
-import com.coursework.coursework2.error.EntityAlreadyPresent;
 import com.coursework.coursework2.error.QuestionPaperAbsent;
-import com.coursework.coursework2.error.SameEntitiesGiven;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.java.JavaQuestionPaper;
-import com.coursework.coursework2.repository.java.JavaQuestionPaperRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 
 @Component
-public class JavaQuestionPaperRepositoryImpl implements JavaQuestionPaperRepository {
+public class JavaQuestionPaperRepository implements QuestionPaperRepository {
 
-    private final ArrayList<JavaQuestionPaper> javaQuestionPapers = new ArrayList<>();
+    private final ArrayList<QuestionPaper> javaQuestionPapers = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -23,7 +21,7 @@ public class JavaQuestionPaperRepositoryImpl implements JavaQuestionPaperReposit
     }
 
     @Override
-    public JavaQuestionPaper add(JavaQuestionPaper javaQuestionPaper) {
+    public QuestionPaper add(QuestionPaper javaQuestionPaper) {
 
         javaQuestionPapers.add(javaQuestionPaper);
         return javaQuestionPaper;
@@ -31,7 +29,7 @@ public class JavaQuestionPaperRepositoryImpl implements JavaQuestionPaperReposit
     }
 
     @Override
-    public JavaQuestionPaper remove(JavaQuestionPaper javaQuestionPaper) {
+    public QuestionPaper remove(QuestionPaper javaQuestionPaper) {
 
         if(!javaQuestionPapers.contains(javaQuestionPaper)) {
             throw new QuestionPaperAbsent("Билет отсутствует");
@@ -43,7 +41,7 @@ public class JavaQuestionPaperRepositoryImpl implements JavaQuestionPaperReposit
     }
 
     @Override
-    public ArrayList<JavaQuestionPaper> getAll() {
+    public ArrayList<QuestionPaper> getAll() {
         return javaQuestionPapers;
     };
 

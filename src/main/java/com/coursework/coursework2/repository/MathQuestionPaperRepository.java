@@ -1,21 +1,17 @@
-package com.coursework.coursework2.repository.math.impl;
+package com.coursework.coursework2.repository;
 
-import com.coursework.coursework2.error.EntityAlreadyPresent;
 import com.coursework.coursework2.error.QuestionPaperAbsent;
-import com.coursework.coursework2.error.SameEntitiesGiven;
-import com.coursework.coursework2.model.java.JavaQuestionPaper;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.math.MathQuestionPaper;
-import com.coursework.coursework2.repository.math.MathQuestionPaperRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Random;
 
 @Component
-public class MathQuestionPaperRepositoryImpl implements MathQuestionPaperRepository {
+public class MathQuestionPaperRepository implements QuestionPaperRepository {
 
-    private final ArrayList<MathQuestionPaper> mathQuestionPapers = new ArrayList<>();
+    private final ArrayList<QuestionPaper> mathQuestionPapers = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -27,7 +23,7 @@ public class MathQuestionPaperRepositoryImpl implements MathQuestionPaperReposit
     }
 
     @Override
-    public MathQuestionPaper add(MathQuestionPaper mathQuestionPaper) {
+    public QuestionPaper add(QuestionPaper mathQuestionPaper) {
 
         mathQuestionPapers.add(mathQuestionPaper);
         return mathQuestionPaper;
@@ -35,7 +31,7 @@ public class MathQuestionPaperRepositoryImpl implements MathQuestionPaperReposit
     }
 
     @Override
-    public MathQuestionPaper remove(MathQuestionPaper mathQuestionPaper) {
+    public QuestionPaper remove(QuestionPaper mathQuestionPaper) {
 
         if(!mathQuestionPapers.contains(mathQuestionPaper)) {
             throw new QuestionPaperAbsent("Билет отсутствует");
@@ -47,7 +43,7 @@ public class MathQuestionPaperRepositoryImpl implements MathQuestionPaperReposit
     }
 
     @Override
-    public ArrayList<MathQuestionPaper> getAll() {
+    public ArrayList<QuestionPaper> getAll() {
         return mathQuestionPapers;
     }
 

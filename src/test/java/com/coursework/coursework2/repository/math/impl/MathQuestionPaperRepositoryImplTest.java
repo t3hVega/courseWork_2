@@ -1,26 +1,25 @@
 package com.coursework.coursework2.repository.math.impl;
 
 import com.coursework.coursework2.error.QuestionPaperAbsent;
-import com.coursework.coursework2.model.java.JavaQuestionPaper;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.math.MathQuestionPaper;
+import com.coursework.coursework2.repository.MathQuestionPaperRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class MathQuestionPaperRepositoryImplTest {
 
-    private MathQuestionPaperRepositoryImpl mathQuestionPaperRepository = new MathQuestionPaperRepositoryImpl();
+    private MathQuestionPaperRepository mathQuestionPaperRepository = new MathQuestionPaperRepository();
 
     @Test
     void shouldCorrectlyAddQuestionPaper() {
 
-        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
-        MathQuestionPaper expected = new MathQuestionPaper("2 + 2", 4);
-        MathQuestionPaper actual = mathQuestionPaperRepository.add(mathQuestionPaper);
+        QuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
+        QuestionPaper expected = new MathQuestionPaper("2 + 2", 4);
+        QuestionPaper actual = mathQuestionPaperRepository.add(mathQuestionPaper);
         Assertions.assertEquals(expected, actual);
 
     }
@@ -28,19 +27,19 @@ public class MathQuestionPaperRepositoryImplTest {
     @Test
     void shouldCorrectlyRemoveQuestionPaper() {
 
-        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
+        QuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
         mathQuestionPaperRepository.add(mathQuestionPaper);
-        MathQuestionPaper expected = new MathQuestionPaper("2 + 2", 4);
-        MathQuestionPaper actual = mathQuestionPaperRepository.remove(mathQuestionPaper);
+        QuestionPaper expected = new MathQuestionPaper("2 + 2", 4);
+        QuestionPaper actual = mathQuestionPaperRepository.remove(mathQuestionPaper);
         Assertions.assertEquals(expected, actual);
 
     }
 
     @Test
     void shouldCorrectlyThrowQuestionPaperAbsentErrorWhenRemovingNonExistentQuestionPaper () {
-        MathQuestionPaper nonExistent = new MathQuestionPaper("1 + 1", 2);
-        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
-        MathQuestionPaper existent = mathQuestionPaperRepository.add(mathQuestionPaper);
+        QuestionPaper nonExistent = new MathQuestionPaper("1 + 1", 2);
+        QuestionPaper mathQuestionPaper = new MathQuestionPaper("2 + 2", 4);
+        QuestionPaper existent = mathQuestionPaperRepository.add(mathQuestionPaper);
         Assertions.assertThrows(QuestionPaperAbsent.class, () -> {
             mathQuestionPaperRepository.remove(nonExistent);
         });
@@ -48,7 +47,7 @@ public class MathQuestionPaperRepositoryImplTest {
 
     @Test
     void getAll() {
-        Collection<MathQuestionPaper> expected = new ArrayList<>();
+        Collection<QuestionPaper> expected = new ArrayList<>();
         MathQuestionPaper questionPaper1 = new MathQuestionPaper("1 + 1", 2);
         MathQuestionPaper questionPaper2 = new MathQuestionPaper("2 + 2", 4);
         MathQuestionPaper questionPaper3 = new MathQuestionPaper("3 + 3", 6);
@@ -58,7 +57,7 @@ public class MathQuestionPaperRepositoryImplTest {
         mathQuestionPaperRepository.add(questionPaper1);
         mathQuestionPaperRepository.add(questionPaper2);
         mathQuestionPaperRepository.add(questionPaper3);
-        Collection<MathQuestionPaper> actual = mathQuestionPaperRepository.getAll();
+        Collection<QuestionPaper> actual = mathQuestionPaperRepository.getAll();
         Assertions.assertEquals(expected, actual);
     }
 }

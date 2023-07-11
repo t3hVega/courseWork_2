@@ -1,21 +1,23 @@
-package com.coursework.coursework2.service.java.implementation;
+package com.coursework.coursework2.service.questionPaper;
 
 import com.coursework.coursework2.error.EntityAlreadyPresent;
 import com.coursework.coursework2.error.SameEntitiesGiven;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.java.JavaQuestionPaper;
-import com.coursework.coursework2.repository.java.JavaQuestionPaperRepository;
-import com.coursework.coursework2.service.java.JavaQuestionPaperService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.coursework.coursework2.repository.QuestionPaperRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
-@Service
-public class JavaQuestionPaperServiceImpl implements JavaQuestionPaperService {
+@Component
+@Qualifier("java")
+public class JavaQuestionPaperService implements QuestionPaperService {
 
-    private final JavaQuestionPaperRepository javaQuestionPaperRepository;
+    private final QuestionPaperRepository javaQuestionPaperRepository;
 
-    public JavaQuestionPaperServiceImpl(JavaQuestionPaperRepository javaQuestionPaperRepository) {
+    public JavaQuestionPaperService(QuestionPaperRepository javaQuestionPaperRepository) {
         this.javaQuestionPaperRepository = javaQuestionPaperRepository;
     }
 
@@ -40,7 +42,7 @@ public class JavaQuestionPaperServiceImpl implements JavaQuestionPaperService {
     }
 
     @Override
-    public JavaQuestionPaper add(String question, String answer) {
+    public QuestionPaper add(String question, String answer) {
 
         if (isQuestionPresent(question) == true) {
             throw new EntityAlreadyPresent("Данный вопрос уже присутствует");
@@ -60,7 +62,7 @@ public class JavaQuestionPaperServiceImpl implements JavaQuestionPaperService {
     }
 
     @Override
-    public JavaQuestionPaper remove(String question, String answer) {
+    public QuestionPaper remove(String question, String answer) {
 
         JavaQuestionPaper javaQuestionPaper = new JavaQuestionPaper(question, answer);
         return javaQuestionPaperRepository.remove(javaQuestionPaper);
@@ -68,16 +70,14 @@ public class JavaQuestionPaperServiceImpl implements JavaQuestionPaperService {
     }
 
     @Override
-    public ArrayList<JavaQuestionPaper> getAll() {
+    public ArrayList<QuestionPaper> getAll() {
         return javaQuestionPaperRepository.getAll();
     }
 
     @Override
-    public JavaQuestionPaper getRandomQuestionPaper() {
+    public QuestionPaper getRandomQuestionPaper() {
         Random random = new Random();
         Integer javaQuestionPaperId = random.nextInt(javaQuestionPaperRepository.getAll().size());
         return javaQuestionPaperRepository.getAll().get(javaQuestionPaperId);
     };
-
-
 }

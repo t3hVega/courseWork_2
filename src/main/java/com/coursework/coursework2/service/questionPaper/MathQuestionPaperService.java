@@ -1,22 +1,22 @@
-package com.coursework.coursework2.service.math.impl;
+package com.coursework.coursework2.service.questionPaper;
+
 
 import com.coursework.coursework2.error.EntityAlreadyPresent;
-import com.coursework.coursework2.error.SameEntitiesGiven;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.math.MathQuestionPaper;
-import com.coursework.coursework2.repository.math.MathQuestionPaperRepository;
-import com.coursework.coursework2.service.math.MathQuestionPaperService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.coursework.coursework2.repository.MathQuestionPaperRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-@Service
-public class MathQuestionPaperServiceImpl implements MathQuestionPaperService {
-
+@Component
+@Qualifier("math")
+public class MathQuestionPaperService implements QuestionPaperService {
     private final MathQuestionPaperRepository mathQuestionPaperRepository;
 
-    public MathQuestionPaperServiceImpl(MathQuestionPaperRepository mathQuestionPaperRepository) {
+    public MathQuestionPaperService(MathQuestionPaperRepository mathQuestionPaperRepository) {
         this.mathQuestionPaperRepository = mathQuestionPaperRepository;
     }
 
@@ -42,28 +42,29 @@ public class MathQuestionPaperServiceImpl implements MathQuestionPaperService {
     }
 
     @Override
-    public MathQuestionPaper add(String question, Integer answer) {
+    public QuestionPaper add(String question, String answer) {
         if (isQuestionPresent(question) == true) {
             throw new EntityAlreadyPresent("Данный вопрос уже присутствует");
         }
-
-        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper(question, answer);
+        Integer answerInt = Integer.parseInt(answer);
+        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper(question, answerInt);
         return mathQuestionPaperRepository.add(mathQuestionPaper);
     }
 
     @Override
-    public MathQuestionPaper remove(String question, Integer answer) {
-        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper(question, answer);
+    public QuestionPaper remove(String question, String answer) {
+        Integer answerInt = Integer.parseInt(answer);
+        MathQuestionPaper mathQuestionPaper = new MathQuestionPaper(question, answerInt);
         return mathQuestionPaperRepository.remove(mathQuestionPaper);
     }
 
     @Override
-    public ArrayList<MathQuestionPaper> getAll() {
+    public ArrayList<QuestionPaper> getAll() {
         return mathQuestionPaperRepository.getAll();
     }
 
     @Override
-    public MathQuestionPaper getRandomQuestionPaper() {
+    public QuestionPaper getRandomQuestionPaper() {
         Random random = new Random();
         Integer questionPaperId = random.nextInt(mathQuestionPaperRepository.getAll().size());
         return mathQuestionPaperRepository.getAll().get(questionPaperId);

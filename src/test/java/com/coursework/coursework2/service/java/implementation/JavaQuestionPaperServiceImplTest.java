@@ -2,11 +2,11 @@ package com.coursework.coursework2.service.java.implementation;
 
 import com.coursework.coursework2.error.EntityAlreadyPresent;
 import com.coursework.coursework2.error.SameEntitiesGiven;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.java.JavaQuestionPaper;
-import com.coursework.coursework2.repository.java.impl.JavaQuestionPaperRepositoryImpl;
-import com.coursework.coursework2.service.java.JavaQuestionPaperService;
+import com.coursework.coursework2.repository.JavaQuestionPaperRepository;
+import com.coursework.coursework2.service.questionPaper.JavaQuestionPaperService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,21 +15,20 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class JavaQuestionPaperServiceImplTest {
 
     @Mock
-    private JavaQuestionPaperRepositoryImpl javaQuestionPaperRepository;
+    private JavaQuestionPaperRepository javaQuestionPaperRepository;
 
     @InjectMocks
-    private JavaQuestionPaperServiceImpl javaQuestionPaperService;
+    private JavaQuestionPaperService javaQuestionPaperService;
 
     @Test
     void shouldReturnTrueWhenQuestionIsPresent() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -41,7 +40,7 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldReturnFalseWhenQuestionIsAbsent() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -53,7 +52,7 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldReturnTrueWhenAnswerIsPresent() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -65,7 +64,7 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldReturnFalseWhenAnswerIsAbsent() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -78,7 +77,7 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldCorrectlyThrowEntityAlreadyPresentErrorWhenAddingSameQuestion() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -90,7 +89,7 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldCorrectlyThrowEntityAlreadyPresentErrorWhenAddingSameAnswer() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
         }};
 
@@ -109,27 +108,27 @@ class JavaQuestionPaperServiceImplTest {
 
     @Test
     void shouldCorrectlyAddQuestion() {
-        JavaQuestionPaper javaQuestionPaper = new JavaQuestionPaper("Почему?", "Затем");
+        QuestionPaper javaQuestionPaper = new JavaQuestionPaper("Почему?", "Затем");
         when(javaQuestionPaperRepository.add(javaQuestionPaper)).thenReturn(javaQuestionPaper);
-        JavaQuestionPaper expected = new JavaQuestionPaper("Почему?", "Затем");
-        JavaQuestionPaper actual = javaQuestionPaperService.add("Почему?", "Затем");
+        QuestionPaper expected = new JavaQuestionPaper("Почему?", "Затем");
+        QuestionPaper actual = javaQuestionPaperService.add("Почему?", "Затем");
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void shouldCorrectlyRemoveQuestion() {
 
-        JavaQuestionPaper javaQuestionPaper = new JavaQuestionPaper("Почему?", "Затем");
+        QuestionPaper javaQuestionPaper = new JavaQuestionPaper("Почему?", "Затем");
         when(javaQuestionPaperRepository.remove(javaQuestionPaper)).thenReturn(javaQuestionPaper);
-        JavaQuestionPaper expected = new JavaQuestionPaper("Почему?", "Затем");
-        JavaQuestionPaper actual = javaQuestionPaperService.remove("Почему?", "Затем");
+        QuestionPaper expected = new JavaQuestionPaper("Почему?", "Затем");
+        QuestionPaper actual = javaQuestionPaperService.remove("Почему?", "Затем");
         Assertions.assertEquals(expected, actual);
 
     }
 
     @Test
     void getAll() {
-        ArrayList<JavaQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
             add(new JavaQuestionPaper("Где?", "Там"));
             add(new JavaQuestionPaper("Когда?", "Тогда"));
@@ -137,12 +136,12 @@ class JavaQuestionPaperServiceImplTest {
 
         when(javaQuestionPaperRepository.getAll()).thenReturn(questionPapers);
 
-        ArrayList<JavaQuestionPaper> expected = new ArrayList<>() {{
+        ArrayList<QuestionPaper> expected = new ArrayList<>() {{
             add(new JavaQuestionPaper("Что?", "Оно"));
             add(new JavaQuestionPaper("Где?", "Там"));
             add(new JavaQuestionPaper("Когда?", "Тогда"));
         }};
-        ArrayList<JavaQuestionPaper> actual = javaQuestionPaperService.getAll();
+        ArrayList<QuestionPaper> actual = javaQuestionPaperService.getAll();
         Assertions.assertEquals(expected, actual);
     }
 }

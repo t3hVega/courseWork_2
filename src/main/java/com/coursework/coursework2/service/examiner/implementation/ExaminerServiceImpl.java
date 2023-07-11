@@ -3,20 +3,20 @@ package com.coursework.coursework2.service.examiner.implementation;
 import com.coursework.coursework2.error.NumberRequestedExceedsAvailableAmount;
 import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.service.examiner.ExaminerService;
-import com.coursework.coursework2.service.java.JavaQuestionPaperService;
-import com.coursework.coursework2.service.math.MathQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.JavaQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.MathQuestionPaperService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-
+    @Qualifier
     private JavaQuestionPaperService javaQuestionPaperService;
-
+    @Qualifier
     private MathQuestionPaperService mathQuestionPaperService;
 
     public ExaminerServiceImpl(JavaQuestionPaperService javaQuestionPaperService,

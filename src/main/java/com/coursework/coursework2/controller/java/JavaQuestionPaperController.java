@@ -1,7 +1,11 @@
 package com.coursework.coursework2.controller.java;
 
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.java.JavaQuestionPaper;
-import com.coursework.coursework2.service.java.JavaQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.JavaQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.QuestionPaperService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,30 +16,33 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/exam")
 public class JavaQuestionPaperController {
-    private final JavaQuestionPaperService javaQuestionPaperService;
+
+    @Autowired
+    @Qualifier("java")
+    private final QuestionPaperService questionPaperService;
 
     public JavaQuestionPaperController(JavaQuestionPaperService javaQuestionPaperService) {
-        this.javaQuestionPaperService = javaQuestionPaperService;
+        this.questionPaperService = javaQuestionPaperService;
     }
 
     @GetMapping("/java/add")
-    public JavaQuestionPaper addQuestion(
+    public QuestionPaper addQuestion(
             @RequestParam("question") String questionText,
             @RequestParam("answer") String answerText
     ) {
-        return javaQuestionPaperService.add(questionText, answerText);
+        return questionPaperService.add(questionText, answerText);
     }
 
     @GetMapping("/java/remove")
-    public JavaQuestionPaper removeQuestion(
+    public QuestionPaper removeQuestion(
             @RequestParam("question") String questionText,
             @RequestParam("answer") String answerText
     ) {
-        return javaQuestionPaperService.remove(questionText, answerText);
+        return questionPaperService.remove(questionText, answerText);
     }
 
     @GetMapping("/java")
-    public ArrayList<JavaQuestionPaper> getQuestions() {
-        return javaQuestionPaperService.getAll();
+    public ArrayList<QuestionPaper> getQuestions() {
+        return questionPaperService.getAll();
     }
 }

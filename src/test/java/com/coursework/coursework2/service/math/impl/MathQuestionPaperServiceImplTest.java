@@ -1,8 +1,10 @@
 package com.coursework.coursework2.service.math.impl;
 
 import com.coursework.coursework2.error.EntityAlreadyPresent;
+import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.math.MathQuestionPaper;
-import com.coursework.coursework2.repository.math.impl.MathQuestionPaperRepositoryImpl;
+import com.coursework.coursework2.repository.MathQuestionPaperRepository;
+import com.coursework.coursework2.service.questionPaper.MathQuestionPaperService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,14 +20,14 @@ import static org.mockito.Mockito.when;
 class MathQuestionPaperServiceImplTest {
 
     @Mock
-    private MathQuestionPaperRepositoryImpl mathQuestionPaperRepository;
+    private MathQuestionPaperRepository mathQuestionPaperRepository;
 
     @InjectMocks
-    private MathQuestionPaperServiceImpl mathQuestionPaperService;
+    private MathQuestionPaperService mathQuestionPaperService;
 
     @Test
     void shouldReturnTrueWhenQuestionIsPresent() {
-        ArrayList<MathQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new MathQuestionPaper("1 + 1", 2));
         }};
 
@@ -37,7 +39,7 @@ class MathQuestionPaperServiceImplTest {
 
     @Test
     void shouldReturnFalseWhenQuestionIsAbsent() {
-        ArrayList<MathQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new MathQuestionPaper("1 + 1", 2));
         }};
 
@@ -50,39 +52,39 @@ class MathQuestionPaperServiceImplTest {
 
     @Test
     void shouldCorrectlyThrowEntityAlreadyPresentErrorWhenAddingSameQuestion() {
-        ArrayList<MathQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new MathQuestionPaper("1 + 1", 2));
         }};
 
         when(mathQuestionPaperRepository.getAll()).thenReturn(questionPapers);
         Assertions.assertThrows(EntityAlreadyPresent.class, () -> {
-            mathQuestionPaperService.add("1 + 1", 2);
+            mathQuestionPaperService.add("1 + 1", "2");
         });
     }
 
     @Test
     void shouldCorrectlyAddQuestion() {
-        MathQuestionPaper javaQuestionPaper = new MathQuestionPaper("1 + 1", 2);
-        when(mathQuestionPaperRepository.add(javaQuestionPaper)).thenReturn(javaQuestionPaper);
-        MathQuestionPaper expected = new MathQuestionPaper("1 + 1", 2);
-        MathQuestionPaper actual = mathQuestionPaperService.add("1 + 1", 2);
+        QuestionPaper mathQuestionPaper = new MathQuestionPaper("1 + 1", 2);
+        when(mathQuestionPaperRepository.add(mathQuestionPaper)).thenReturn(mathQuestionPaper);
+        QuestionPaper expected = new MathQuestionPaper("1 + 1", 2);
+        QuestionPaper actual = mathQuestionPaperService.add("1 + 1", "2");
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void shouldCorrectlyRemoveQuestion() {
 
-        MathQuestionPaper javaQuestionPaper = new MathQuestionPaper("1 + 1", 2);
+        QuestionPaper javaQuestionPaper = new MathQuestionPaper("1 + 1", 2);
         when(mathQuestionPaperRepository.remove(javaQuestionPaper)).thenReturn(javaQuestionPaper);
-        MathQuestionPaper expected = new MathQuestionPaper("1 + 1", 2);
-        MathQuestionPaper actual = mathQuestionPaperService.remove("1 + 1", 2);
+        QuestionPaper expected = new MathQuestionPaper("1 + 1", 2);
+        QuestionPaper actual = mathQuestionPaperService.remove("1 + 1", "2");
         Assertions.assertEquals(expected, actual);
 
     }
 
     @Test
     void getAll() {
-        ArrayList<MathQuestionPaper> questionPapers = new ArrayList<>() {{
+        ArrayList<QuestionPaper> questionPapers = new ArrayList<>() {{
             add(new MathQuestionPaper("1 + 1", 2));
             add(new MathQuestionPaper("2 + 2", 4));
             add(new MathQuestionPaper("3 + 3", 6));
@@ -95,7 +97,7 @@ class MathQuestionPaperServiceImplTest {
             add(new MathQuestionPaper("2 + 2", 4));
             add(new MathQuestionPaper("3 + 3", 6));
         }};
-        ArrayList<MathQuestionPaper> actual = mathQuestionPaperService.getAll();
+        ArrayList<QuestionPaper> actual = mathQuestionPaperService.getAll();
         Assertions.assertEquals(expected, actual);
     }
 }

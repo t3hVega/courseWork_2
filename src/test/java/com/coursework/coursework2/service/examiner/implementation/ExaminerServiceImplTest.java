@@ -4,42 +4,38 @@ import com.coursework.coursework2.error.NumberRequestedExceedsAvailableAmount;
 import com.coursework.coursework2.model.base.QuestionPaper;
 import com.coursework.coursework2.model.java.JavaQuestionPaper;
 import com.coursework.coursework2.model.math.MathQuestionPaper;
-import com.coursework.coursework2.service.java.implementation.JavaQuestionPaperServiceImpl;
-import com.coursework.coursework2.service.math.impl.MathQuestionPaperServiceImpl;
+import com.coursework.coursework2.service.questionPaper.JavaQuestionPaperService;
+import com.coursework.coursework2.service.questionPaper.MathQuestionPaperService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.ExpectedCount.times;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
 
     @Mock
-    private JavaQuestionPaperServiceImpl javaQuestionPaperService;
+    private JavaQuestionPaperService javaQuestionPaperService;
     @Mock
-    private MathQuestionPaperServiceImpl mathQuestionPaperService;
+    private MathQuestionPaperService mathQuestionPaperService;
 
     @InjectMocks
     private ExaminerServiceImpl examinerService;
-    ArrayList<JavaQuestionPaper> javaQuestionPapers= new ArrayList<>() {{
+    ArrayList<QuestionPaper> javaQuestionPapers= new ArrayList<>() {{
         add(new JavaQuestionPaper("Что?", "Оно"));
         add(new JavaQuestionPaper("Где?", "Там"));
         add(new JavaQuestionPaper("Когда?", "Тогда"));
     }};
 
-    ArrayList<MathQuestionPaper> mathQuestionPapers= new ArrayList<>() {{
+    ArrayList<QuestionPaper> mathQuestionPapers= new ArrayList<>() {{
         add(new MathQuestionPaper("1 + 1", 2));
         add(new MathQuestionPaper("2 + 2", 4));
         add(new MathQuestionPaper("3 + 3", 6));
